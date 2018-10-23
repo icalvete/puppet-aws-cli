@@ -1,0 +1,10 @@
+[<%= scope.lookupvar('profile') -%>]
+region = <%= scope.lookupvar('region') %>
+<% if scope.lookupvar('output') -%>
+output = <%= scope.lookupvar('output') %>
+<% end -%>
+<% if scope.lookupvar('s3') -%>
+s3 =
+  multipart_chunksize = <%= scope.lookupvar('s3_multipart_chunksize') %>
+  multipart_threshold = <%= scope.lookupvar('s3_multipart_threshold') %>
+<% end -%>

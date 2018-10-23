@@ -1,10 +1,15 @@
 define aws_cli::configure (
 
-  $user                  = 'root',
-  $home                  = '/root',
-  $region                = 'eu-west-1',
-  $aws_access_key_id     = undef,
-  $aws_secret_access_key = undef
+  $user                   = 'root',
+  $home                   = '/root',
+  $profile                = 'default',
+  $region                 = 'eu-west-1',
+  $aws_access_key_id      = undef,
+  $aws_secret_access_key  = undef,
+  $output                 = undef,
+  $s3                     = true,
+  $s3_multipart_chunksize = '8MB',
+  $s3_multipart_threshold = '8MB'
 
 ) {
 
@@ -30,9 +35,7 @@ define aws_cli::configure (
     owner   => $user,
     group   => 'nogroup',
     mode    => '0600',
-    content => "[default]
-region = ${region}
-",
+    content => template("${module_name}/config.erb")
   }
 
   file { "aws_credentials_file_${user}":
@@ -41,9 +44,6 @@ region = ${region}
     owner   => $user,
     group   => 'nogroup',
     mode    => '0600',
-    content => "[default]
-aws_access_key_id = ${aws_access_key_id}
-aws_secret_access_key = ${aws_secret_access_key}
-",
+    content => template("${module_name}/credentials.erb")
   }
 }

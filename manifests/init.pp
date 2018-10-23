@@ -1,10 +1,14 @@
 class aws_cli (
 
-  $user                  = $aws_cli::params::user,
-  $home                  = undef,
-  $region                = $aws_cli::params::region,
-  $aws_access_key_id     = undef,
-  $aws_secret_access_key = undef
+  $user                   = $aws_cli::params::user,
+  $home                   = undef,
+  $region                 = $aws_cli::params::region,
+  $aws_access_key_id      = undef,
+  $aws_secret_access_key  = undef,
+  $output                 = undef,
+  $s3                     = false,
+  $s3_multipart_chunksize = '8MB',
+  $s3_multipart_threshold = '8MB'
 
 ) inherits aws_cli::params {
 
